@@ -2,12 +2,18 @@ import { CustomElement } from '../../decorators/CustomElement/CustomElement.deco
 
 @CustomElement({
 	selector: 'action-button',
-	template: '<button>Minify</button>',
+	template: '<button disabled>Minify</button>',
+	// TODO: add styleURL support
+	// styleURL: './ActionButton.styles.scss'
 	style: `:host button {
 		color: #fff;
-        background: blue;
+	    background: blue;
 		cursor: pointer;
-    }`
+	}
+	:host button:disabled {
+		opacity: 0.6;
+	}
+	`
 })
 class ActionButton extends HTMLElement {
 	constructor() {
@@ -15,6 +21,13 @@ class ActionButton extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.shadowRoot.addEventListener('click', (event: Event) => console.log);
+		this.shadowRoot.addEventListener('click', (event: Event) => {
+			document.dispatchEvent(new CustomEvent('minify'));
+		});
+
+		document.addEventListener('toggleButton', (event) => {
+			const button = this.shadowRoot.lastChild as HTMLButtonElement;
+			button.disabled = false;
+		});
 	}
 }

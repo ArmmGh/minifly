@@ -11,13 +11,18 @@ export default {
 		rules: [
 			{
 				test: /.ts$/,
-				use: 'ts-loader',
+				use: ['ts-loader'],
+				exclude: /node_modules/
+			},
+			{
+				test: /.(css|scss)$/,
+				use: ['style-loader', 'css-loader', 'sass-loader'],
 				exclude: /node_modules/
 			}
 		]
 	},
 	resolve: {
-		extensions: ['.ts', '.js']
+		extensions: ['.ts', '.js', '.css', '.scss']
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

@@ -1,7 +1,7 @@
 import { CustomElementMetadata } from '../../global/types';
 import { validateSelector, validateTemplate } from './CustomElement.validator';
 
-export function CustomElement({ selector, template, style, useShadow = true }: CustomElementMetadata) {
+export function CustomElement({ selector, template, style, styleURL, useShadow = true }: CustomElementMetadata) {
 	return (target: CustomElementConstructor): void => {
 		validateSelector(selector);
 		validateTemplate(template);
@@ -9,6 +9,8 @@ export function CustomElement({ selector, template, style, useShadow = true }: C
 		const templateElement = document.createElement('template') as HTMLTemplateElement;
 		if (style) {
 			template = `<style>${style}</style> ${template}`;
+		} else if (styleURL) {
+			// Todo
 		}
 
 		templateElement.innerHTML = template;
