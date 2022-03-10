@@ -10,7 +10,7 @@ export function CustomElement({ selector, template, style, styleURL, useShadow =
 		if (style) {
 			template = `<style>${style}</style> ${template}`;
 		} else if (styleURL) {
-			// Todo
+			// const a = import(`../../ActionButton/${styleURL}`);
 		}
 
 		templateElement.innerHTML = template;

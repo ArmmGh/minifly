@@ -1,3 +1,3 @@
-import('./components/index');
+import './components/index';
 
 window.addEventListener('DOMContentLoaded', () => {});

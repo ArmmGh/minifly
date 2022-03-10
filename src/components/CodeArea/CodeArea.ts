@@ -1,4 +1,6 @@
+import { Dispatch } from '../../decorators/Dispatch/Dispatch.decorator';
 import { CustomElement } from '../../decorators/CustomElement/CustomElement.decorator';
+import { EventDispatcher } from 'global/types';
 
 @CustomElement({
 	selector: 'code-area',
@@ -9,6 +11,10 @@ import { CustomElement } from '../../decorators/CustomElement/CustomElement.deco
 })
 class CodeArea extends HTMLElement {
 	private firstTimeInit: boolean = true;
+
+	@Dispatch('toggleButton')
+	private onInput: EventDispatcher;
+
 	constructor() {
 		super();
 	}
@@ -30,8 +36,7 @@ class CodeArea extends HTMLElement {
 		const realTarget = target as HTMLTextAreaElement;
 
 		if (realTarget?.value.trim().length && this.firstTimeInit) {
-			// Todo: create global function for dispatching events
-			document.dispatchEvent(new Event('toggleButton'));
+			this.onInput.emit();
 			this.firstTimeInit = false;
 		}
 	};

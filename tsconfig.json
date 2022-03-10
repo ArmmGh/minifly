@@ -1,10 +1,13 @@
 {
 	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
 		"experimentalDecorators": true,
 		"module": "ESNext",
-		"target": "ES6",
+		"target": "es2017",
 		"sourceMap": true,
 		"moduleResolution": "node",
+		"baseUrl": "./src",
+		"importHelpers": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules"]
