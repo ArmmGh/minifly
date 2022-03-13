@@ -6,8 +6,8 @@
 		"target": "es2017",
 		"sourceMap": true,
 		"moduleResolution": "node",
-		"baseUrl": "./src",
-		"importHelpers": true
+		"importHelpers": true,
+		"emitDecoratorMetadata": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules"]

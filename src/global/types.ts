@@ -2,7 +2,7 @@ export type CustomElementMetadata = {
 	selector: string;
 	template: string;
 	style?: string;
-	styleURL?: string;
+	styleUrl?: string;
 	useShadow?: boolean;
 };
 
@@ -14,4 +14,10 @@ export type CustomEventOptions = {
 	bubbles?: boolean;
 	composed?: boolean;
 	detail?: any;
+};
+
+export type ListenerMetadata = {
+	selector: string;
+	eventName: keyof GlobalEventHandlersEventMap;
+	handler: Function;
 };

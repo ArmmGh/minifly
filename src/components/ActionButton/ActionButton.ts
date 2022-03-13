@@ -3,8 +3,8 @@ import { CustomElement } from '../../decorators/CustomElement/CustomElement.deco
 @CustomElement({
 	selector: 'action-button',
 	template: '<button disabled>Minify</button>',
-	// TODO: add styleURL support
-	// styleURL: './ActionButton.styles.scss'
+	// TODO: add styleUrl support
+	// styleUrl: './ActionButton.styles.scss',
 	style: `:host button {
 		color: #fff;
 	    background: blue;
@@ -12,8 +12,7 @@ import { CustomElement } from '../../decorators/CustomElement/CustomElement.deco
 	}
 	:host button:disabled {
 		opacity: 0.6;
-	}
-	`
+	}`
 })
 class ActionButton extends HTMLElement {
 	constructor() {
