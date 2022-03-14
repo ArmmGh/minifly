@@ -1,11 +1,14 @@
 import { CustomElement } from '../../decorators/CustomElement/CustomElement.decorator';
+import { Dispatch } from '../../decorators/Dispatch/Dispatch.decorator';
+import { Listen } from '../../decorators/Listen/Listen.decorator';
+import { EventDispatcher } from '../../global/types';
 
 @CustomElement({
-	selector: 'action-button',
-	template: '<button disabled>Minify</button>',
-	// TODO: add styleUrl support
-	// styleUrl: './ActionButton.styles.scss',
-	style: `:host button {
+    selector: 'action-button',
+    template: '<button disabled>Minify</button>',
+    // TODO: add styleUrl support
+    // styleUrl: './ActionButton.styles.scss',
+    style: `:host button {
 		color: #fff;
 	    background: blue;
 		cursor: pointer;
@@ -15,18 +18,20 @@ import { CustomElement } from '../../decorators/CustomElement/CustomElement.deco
 	}`
 })
 class ActionButton extends HTMLElement {
-	constructor() {
-		super();
-	}
+    constructor() {
+        super();
+    }
+    @Listen('toggleButton')
+    onToggleButton(event: CustomEvent) {
+        const button = this.shadowRoot.lastChild as HTMLButtonElement;
+        button.disabled = false;
+    }
 
-	connectedCallback() {
-		this.shadowRoot.addEventListener('click', (event: Event) => {
-			document.dispatchEvent(new CustomEvent('minify'));
-		});
+    @Listen('click')
+    handleButtonClick(event: CustomEvent) {
+        this.onButtonClick.emit();
+    }
 
-		document.addEventListener('toggleButton', (event) => {
-			const button = this.shadowRoot.lastChild as HTMLButtonElement;
-			button.disabled = false;
-		});
-	}
+    @Dispatch('minify', document.getElementById('output'))
+    private onButtonClick: EventDispatcher;
 }

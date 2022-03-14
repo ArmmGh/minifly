@@ -1,23 +1,27 @@
 export type CustomElementMetadata = {
-	selector: string;
-	template: string;
-	style?: string;
-	styleUrl?: string;
-	useShadow?: boolean;
+    selector: string;
+    template: string;
+    style?: string;
+    styleUrl?: string;
+    useShadow?: boolean;
 };
 
 export type EventDispatcher = {
-	emit(options?: CustomEventOptions): void;
+    emit(options?: CustomEventOptions): void;
 };
 
 export type CustomEventOptions = {
-	bubbles?: boolean;
-	composed?: boolean;
-	detail?: any;
+    bubbles?: boolean;
+    composed?: boolean;
+    detail?: any;
 };
 
 export type ListenerMetadata = {
-	selector: string;
-	eventName: keyof GlobalEventHandlersEventMap;
-	handler: Function;
+    selector: string;
+    eventName: keyof GlobalEventHandlersEventMap;
+    handler: Function;
+};
+
+export type ConstructorWithListeners = {
+    constructor: CustomElementConstructor & { listeners?: Array<ListenerMetadata> };
 };
