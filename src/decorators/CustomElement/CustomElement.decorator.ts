@@ -13,6 +13,7 @@ export function CustomElement({ selector, template, style, styleUrl, useShadow =
         } else if (styleUrl) {
             // const a = import(`../../ActionButton/${styleUrl}`);
         }
+        // Todo: convert {{}} to dynamic values
         templateElement.innerHTML = template;
 
         const connectedCallback = target.prototype.connectedCallback || function () {};
