@@ -15,6 +15,7 @@ import { Attribute } from '../../decorators/Attribute/Attribute.decorator';
             position: relative;
         }
         :host header {
+            padding: 5px 10px;
             background-color: #2F3C7E;
             color: #FBEAEB;
         }
@@ -32,13 +33,12 @@ class CodeArea extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log(this.header)
         if (this.shadowRoot.host.id === 'input') {
         } else if (this.shadowRoot.host.id === 'output') {
         }
     }
-
-    @Attribute('title') header: string;
+    
+    @Attribute('header') header: string;
 
     @Dispatch('toggleButton', document.querySelector('action-button'))
     private onInput: EventDispatcher;

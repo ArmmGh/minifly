@@ -8,6 +8,7 @@ export function CustomElement({ selector, template, style, styleUrl, useShadow =
         validateTemplate(template);
 
         const templateElement = document.createElement('template') as HTMLTemplateElement;
+
         if (style) {
             template = `<style>${style}</style> ${template}`;
         } else if (styleUrl) {
@@ -27,9 +28,19 @@ export function CustomElement({ selector, template, style, styleUrl, useShadow =
             // besides custom callback calling Target's class callback
             connectedCallback.call(this);
 
+            CustomElement.bindAttribute.call(this);
             addEventListenersTo(this);
         };
 
         customElements.define(selector, target);
     };
 }
+
+CustomElement.bindAttribute = function () {
+    const elem = this as HTMLElement;
+    const root = elem.shadowRoot || elem;
+
+    root.innerHTML = root.innerHTML.replace(/{{(.*)}}/g, (match, propName) => {
+        return elem[propName] || '';
+    });
+};

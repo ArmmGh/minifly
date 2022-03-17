@@ -5,17 +5,32 @@ import { EventDispatcher } from '../../global/types';
 
 @CustomElement({
     selector: 'action-button',
-    template: '<button disabled>Minify</button>',
+    template: '<button><slot></slot></button>',
     // TODO: add styleUrl support
     // styleUrl: './ActionButton.styles.scss',
-    style: `:host button {
-		color: #fff;
-	    background: blue;
+    style: `:host {
+        display: flex;
+    }
+    :host button {
+        align-self: flex-end;
+        margin: 5px 20px;
+        padding: 5px 10px;
+		color: #2F3C7E;
+        border: 1px solid #2F3C7E;
+	    background-color: #FBEAEB;
+        border-radius: 15px;
 		cursor: pointer;
+        font-size: 14px;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
 	}
-	:host button:disabled {
-		opacity: 0.6;
-	}`
+    :host button:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 10px;
+        transform: translateY(-1px);
+    }
+    :host button:active {
+        box-shadow: none;
+        transform: translateY(0);
+    }`
 })
 class ActionButton extends HTMLElement {
     constructor() {
