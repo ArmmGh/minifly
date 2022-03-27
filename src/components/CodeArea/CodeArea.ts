@@ -8,7 +8,7 @@ import { minify } from '../../utils';
 @CustomElement({
     selector: 'code-area',
     template: `<header>{{header}}</header>
-               <textarea />`,
+               <textarea >`,
     style: `
         :host {
             width: 400px;
@@ -33,10 +33,28 @@ import { minify } from '../../utils';
             background-color: #FBEAEB;
             font-size: 16px;
             border: 1px solid #2F3C7E;
+            cursor: inherit;
         }
         :host textarea::selection {
             color: #FBEAEB;
             background-color: rgb(47 60 126 / 65%);
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+            transition: background-color .3s;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgb(47 60 126 / 20%);
+            transition: background-color .3s;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgb(47 60 126 / 45%);
+            transition: background-color .3s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2F3C7E;
+            transition: background-color .3s;
         }
         `
 })
