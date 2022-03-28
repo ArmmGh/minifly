@@ -65,11 +65,7 @@ class CodeArea extends HTMLElement {
         super();
     }
 
-    connectedCallback() {
-        if (this.shadowRoot.host.id === 'input') {
-        } else if (this.shadowRoot.host.id === 'output') {
-        }
-    }
+    connectedCallback() {}
 
     @Attribute('header') header: string;
 
@@ -89,8 +85,25 @@ class CodeArea extends HTMLElement {
 
     @Listen('minify')
     private handleMinifyEvent(event: CustomEvent) {
+        const textarea = this.shadowRoot.querySelector('textarea');
         const input = document.getElementById('input').shadowRoot.lastChild as HTMLTextAreaElement;
-        const output = this.shadowRoot.lastChild as HTMLTextAreaElement;
-        output.value = minify(input.value);
+        textarea.value = minify(input.value);
+    }
+
+    @Listen('copy')
+    private handleCopyEvent(event: CustomEvent) {
+        const textarea = this.shadowRoot.querySelector('textarea');
+        navigator.clipboard.writeText(textarea.value);
+        this.onCopied.emit();
+    }
+
+    @Dispatch('copied', document.getElementById('copy'))
+    private onCopied: EventDispatcher;
+
+    @Listen('selectAll')
+    private handleSelectAllEvent(event: CustomEvent) {
+        const textarea = this.shadowRoot.querySelector('textarea');
+        textarea.focus();
+        textarea.select();
     }
 }

@@ -15,8 +15,14 @@ body {
         align-items: center;
         height: 100vh;
         main {
+            display: flex;
             .area {
                 display: flex;
+                flex-direction: column;
+                .actions {
+                    display: flex;
+                    align-self: flex-start;
+                }
             }
         }
     }

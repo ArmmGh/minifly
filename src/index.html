@@ -11,10 +11,17 @@
             <main>
                 <div class="area">
                     <code-area header="Input" id="input"></code-area>
-                    <animate-text text="JavaScript Minifier" />
-                    <code-area header="Output" id="output"></code-area>
+                    <div class="actions">
+                        <action-button id="minify">Minify</action-button>
+                    </div>
                 </div>
-                <action-button id="action">Minify</action-button>
+                <div class="area">
+                    <code-area header="Output" id="output"></code-area>
+                    <div class="actions">
+                        <action-button id="copy">Copy to clipboard</action-button>
+                        <action-button id="selectAll">Select All</action-button>
+                    </div>
+                </div>
             </main>
         </div>
     </body>

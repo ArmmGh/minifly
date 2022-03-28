@@ -1,4 +1,6 @@
 const commentsReg = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
-const spacesReg = /(\s*)((?:=|>|\(|\)|\(|{|}|;|,|:)+)(\s*)/g;
+const whiteSpacesReg = /[\s]{1,}/g;
+const spacesReg = /(\s*)((?:=|>|\(|\)|\(|{|}|;|,|:|\|)+)(\s*)/g;
 
-export const minify = (input: string): string => input.replace(commentsReg, '').replace(spacesReg, '$2');
+export const minify = (input: string): string =>
+    input.trim().replace(whiteSpacesReg, ' ').replace(commentsReg, '').replace(spacesReg, '$2');
